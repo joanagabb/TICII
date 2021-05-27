@@ -15,8 +15,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        float movement = Input.GetAxis("Horizontal");
-        Walk(movement);
+        float movementX = Input.GetAxis("Horizontal");
+        Walk(movementX);
 
         if(Input.GetKeyDown(KeyCode.UpArrow) && Mathf.Abs(rb.velocity.y) < 0.001f)
         {
@@ -24,9 +24,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Walk(float movement)
+    void Walk(float movementX)
     {
-        transform.position += new Vector3(movement, 0) * Time.deltaTime * speed;
+        Vector2 movement = new Vector2(movementX * speed, rb.velocity.y);
+        rb.velocity = movement;
     }
 
     void Jump()

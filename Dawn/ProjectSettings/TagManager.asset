@@ -9,11 +9,14 @@ TagManager:
   - EnemyTrigger
   - Enemy
   - Win
+  - EnemyDefeat
+  - Checkpoint
+  - Special Lantern
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Lanterns
   - Water
   - UI
   - 
@@ -45,4 +48,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 978582703
+    locked: 0
+  - name: Tilemap
+    uniqueID: 1915144073
+    locked: 0
+  - name: Lanterns
+    uniqueID: 2781678091
     locked: 0

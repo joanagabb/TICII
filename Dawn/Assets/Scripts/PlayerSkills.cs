@@ -1,17 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerSkills : MonoBehaviour
 {
-    bool LanternSkill = false;
-    bool WallSkill = false;
-    bool LightSkill = false;
+    public bool LanternSkill = false;
+    public bool WallSkill = false;
+    public bool LightSkill = false;
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (Input.GetKey(KeyCode.Z))
-        {
             switch (collision.gameObject.name)
             {
                 case "Lantern Skill":
@@ -30,11 +29,15 @@ public class PlayerSkills : MonoBehaviour
                     LightSkill = true;
                     Debug.Log("LightSkill");
                     Destroy(collision.gameObject);
+                    SceneManager.LoadScene("Win");
+                    break;
+
+                case "Win":
+                    SceneManager.LoadScene("Win");
                     break;
 
                 default:
                     break;
             }
-        }
     }
 }

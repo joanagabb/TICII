@@ -10,21 +10,15 @@ public class OnClick : MonoBehaviour
         SceneManager.LoadScene("InGame");
     }
 
-    public void LoadControles()
-    {
-        SceneManager.LoadScene("Controles");
-    }
-
     public void LoadMenu()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Menu");
     }
 
-    private void Update()
+    public void Quit()
     {
-        if(Input.GetKey(KeyCode.S))
-        {
-            Application.Quit();
-        }
+        Application.Quit();
     }
+
 }

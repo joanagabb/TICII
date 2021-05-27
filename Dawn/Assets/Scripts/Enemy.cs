@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    string estado;
+    public string estado;
     public float patrolSpeed = 5;
     private bool movingRight = true;
 
     void Start()
     {
         estado = "patrulha";
-        StartCoroutine("StunOff");
     }
 
     private void Update()
@@ -21,6 +20,10 @@ public class Enemy : MonoBehaviour
         {
             Patrulha();
         }
+        else if(estado == "derrota")
+        {
+            Derrota();
+        }
         else
         {
             Stun();
@@ -29,29 +32,20 @@ public class Enemy : MonoBehaviour
 
     void Stun()
     {
-        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.5f);
-        GetComponent<Collider2D>().isTrigger = true;
+        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.3f);
     }
 
     void Patrulha()
     {
         GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
-        GetComponent<Collider2D>().isTrigger = false;
 
         transform.Translate(Vector2.right * patrolSpeed * Time.deltaTime);
     }
 
-    /*private IEnumerator StunOff()
+    void Derrota()
     {
-        while (estado != "stun")
-        {
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(5);
-        estado = "patrulha";
-        StartCoroutine("StunOff");
-    }*/
+        Destroy(gameObject);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -73,11 +67,21 @@ public class Enemy : MonoBehaviour
         {
             estado = "stun";
         }
+
+        if(collision.gameObject.tag == "EnemyDefeat")
+        {
+            estado = "derrota";
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "EnemyTrigger")
+        {
+            estado = "patrulha";
+        }
+
+        if (collision.gameObject.tag == "EnemyDefeat")
         {
             estado = "patrulha";
         }
