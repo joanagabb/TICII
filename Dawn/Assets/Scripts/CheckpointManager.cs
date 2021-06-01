@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CheckpointManager : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class CheckpointManager : MonoBehaviour
 
     void Update()
     {
-        //Physics2D.IgnoreCollision(lightCollider.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -22,11 +23,10 @@ public class CheckpointManager : MonoBehaviour
 
         if (collision.gameObject.tag == "Enemy" && collision.gameObject.GetComponent<Enemy>().estado != "stun")
         {
-            Debug.Log("encosto");
-
             if(gameObject.GetComponent<HeartSystem>().health <= 0)
             {
-                gameObject.transform.position = start.position;
+                //gameObject.transform.position = start.position;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
             else
             {

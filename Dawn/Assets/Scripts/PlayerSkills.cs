@@ -29,7 +29,6 @@ public class PlayerSkills : MonoBehaviour
                     LightSkill = true;
                     Debug.Log("LightSkill");
                     Destroy(collision.gameObject);
-                    SceneManager.LoadScene("Win");
                     break;
 
                 case "Win":
